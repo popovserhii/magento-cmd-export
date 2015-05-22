@@ -1,4 +1,4 @@
-# Magent CMD Export
+# Magento CMD Export
 Magento command line export
 
 Add script to shell/ dicrectory in your magento project.
