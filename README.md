@@ -1,2 +1,2 @@
-# magento-cmd-export.php
+# Magent CMD Export
 Magento command line export
