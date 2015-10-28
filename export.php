@@ -18,7 +18,7 @@
 error_reporting(E_ALL | E_STRICT);
 ini_set('display_errors', 1);
 
-define('MAGENTO_ROOT', getcwd());
+define('MAGENTO_ROOT', dirname(__DIR__));
 
 $mageconf = MAGENTO_ROOT . '/app/etc/local.xml';  // Mage local.xml config
 $mageapp = MAGENTO_ROOT . '/app/Mage.php';       // Mage app location
