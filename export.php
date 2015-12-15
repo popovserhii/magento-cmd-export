@@ -7,9 +7,9 @@
  * @author Popov Sergiy <popov@agere.com.ua>
  * @datetime: 10.04.14 12:20
  * @link http://blog.variux.com/?p=124
+ * @link http://magento.stackexchange.com/a/45671
  * @link http://phpmysqltalk.com/1718-magento-dataflow-exportimport-form-the-command-line.html
  */
- 
 /**
  * Import/Export Script to run Import/Export profile
  * from command line or cron. Cleans entries from dataflow_batch_(import|export) table
@@ -30,29 +30,27 @@ class Mage_Shell_Export extends Mage_Shell_Abstract {
 	public function run() {
 		/** Magento Import/Export Profiles */
 		$profileId = $this->getArg('profile');
-		if ($profileId){
+		if ($profileId) {
+			$this->log('Starting...');
+
+			/** @var Mage_Dataflow_Model_Profile $profile */
 			$profile = Mage::getModel('dataflow/profile');
-			$userModel = Mage::getModel('admin/user');
-			$userModel->setUserId(0);
-			Mage::getSingleton('admin/session')->setUser($userModel);
 			$profile->load($profileId);
 			if (!$profile->getId()) {
-				Mage::getSingleton('adminhtml/session')->addError('ERROR: Incorrect profile id');
+				Mage::throwException('ERROR: Incorrect Profile for id ' . $profileId);
 			}
 
-			Mage::log('Export ' . $profileId . ' Started.', null, $this->logFile);
-
 			Mage::register('current_convert_profile', $profile);
+
 			$profile->run();
+
 			$batchModel = Mage::getSingleton('dataflow/batch');
-
-			Mage::log('Export ' . $profileId . ' Complete. BatchID: ' . $batchModel->getId(), null, $this->logFile);
-			echo 'Export Complete. BatchID: ' . $batchModel->getId() . "\n";
-
+			$this->log('Export Complete. ProfileID: ' . $profileId . '. BatchID: ' . $batchModel->getId());
+			
 			/** Connect to Magento database */
 			sleep(30);
 
-			$config  = Mage::getConfig()->getResourceConnectionConfig("default_setup");
+			$config  = Mage::getConfig()->getResourceConnectionConfig('default_setup');
 			$db['host'] = $config->host;
 			$db['name'] = $config->dbname;
 			$db['user'] = $config->username;
@@ -71,12 +69,19 @@ class Mage_Shell_Export extends Mage_Shell_Abstract {
 			 * exports use "dataflow_batch_export" table
 			 */
 			$table = 'dataflow_batch_export';
-			$queryString = "TRUNCATE " . $db['pref'] . $table;
+			$queryString = 'TRUNCATE ' . $db['pref'] . $table;
 
 			mysql_query($queryString) or die(mysql_error());
+		
+			$this->log('Completed!');
 		} else {
 			echo $this->usageHelp();
 		}
+	}
+	
+	protected function log($msg) {
+		echo $msg . "\n";
+		Mage::log($msg, null, $this->logFile);
 	}
 
 	/**
