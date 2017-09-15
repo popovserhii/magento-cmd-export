@@ -11,7 +11,7 @@ Run as
 php shell/export.php --profile 1
 ```
 
-After you can take file from var/export/
+After that, you can find file in var/export/
 
 ###Trick and Treat
 1. If you get error like this `PHP Fatal error:  Allowed memory size of...` try run command as
