@@ -2,9 +2,9 @@
 /**
  * Import/Export from Shell
  *
- * @category Agere
- * @package Agere_Shell
- * @author Popov Sergiy <popov@agere.com.ua>
+ * @category Popov
+ * @package Popov_Shell
+ * @author Serhii Popov <popow.serhii@gmail.com>
  * @datetime: 10.04.14 12:20
  * @link http://blog.variux.com/?p=124
  * @link http://magento.stackexchange.com/a/45671
