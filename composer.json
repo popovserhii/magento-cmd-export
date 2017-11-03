@@ -1,0 +1,15 @@
+{
+    "name": "popov/magento-cmd-export",
+    "type": "magento-module",
+    "license":"MIT Licence",
+    "description":"Run Export/Import process from command line",
+    "authors":[{
+        "name":"Serhii Popov",
+        "email":"popow.serhii@gmai.com"
+    }],
+    "extra": {
+        "map": [
+          ["shell/export.php", "shell/export.php"]
+        ]
+    }
+}
