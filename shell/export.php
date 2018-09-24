@@ -14,7 +14,11 @@
  * Import/Export Script to run Import/Export profile
  * from command line or cron. Cleans entries from dataflow_batch_(import|export) table
  */
-require_once 'abstract.php';
+
+$rootPath = realpath($file = './');
+require_once $rootPath . '/shell/abstract.php';
+
+//require_once 'abstract.php';
 
 class Mage_Shell_Export extends Mage_Shell_Abstract {
 
