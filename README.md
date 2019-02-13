@@ -1,7 +1,7 @@
 # Magento CMD (command line interface) Export
 Magento command line export
 
-Add script to shell/ dicrectory in your magento project.
+Add script to shell/ directory in your magento project.
 
 Give your ```profile ID``` as an argument to the script (System > Import/Export > Profiles get profile ID from).
 
@@ -17,7 +17,7 @@ After that, you can find file in var/export/
 1. If you get error like this `PHP Fatal error:  Allowed memory size of...`:
 
  a. Magento parse `.httaccess` in project root before run any CLI command. 
- This is not obviously but you need comment next two line in that file
+ This is not obvious but you need to comment next two line in that file
  ```php
  ...
  ## adjust memory limit
